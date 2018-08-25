@@ -1,0 +1,17 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [shape=record, label="{Go:|\<Go e.0\>}"];
+  C1 [label="<Fab e.0>"];
+  C0 -> C1;
+  C2 [shape=record, label="{F1:|\<DoFab ε, e.0\>}"];
+  C1 -> C2;
+  C3 [label="<DoFab ε, 'A' e.0>"];
+  C2 -> C3 [label="e.0 → 'A' e.0"];
+  C4 [label="…", style="rounded,dotted"];
+  C2 -> C4 [label="e.0 → s.1 e.0,\ns.1≠'A'"];
+  C5 [label="…", style="rounded,dotted"];
+  C2 -> C5 [label="e.0 → ε"];
+  C6 [shape=record, label="{F2|\<DoFab 'B', e.0\>}", style="rounded,dashed"];
+  C3 -> C6;
+}

@@ -1,0 +1,31 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [shape=record, label="{Go:|\<Go e.0\>}"];
+  C1 [label="<Fab e.0>"];
+  C0 -> C1;
+  C2 [label="<DoFab ε, e.0>"];
+  C1 -> C2;
+  C3 [label="let ε ← e.1 in <DoFab e.1, e.0>"];
+  C2 -> C3;
+  C4 [label="ε"];
+  C3 -> C4 [label="let"];
+  C5 [shape=record, label="{F1:|\<DoFab e.1, e.0\>}"];
+  C3 -> C5 [label="in"];
+  C6 [label="<DoFab e.1 'B', e.0>"];
+  C5 -> C6 [label="e.0 → 'A' e.0"];
+  C7 [label="<DoFab e.1 s.2, e.0>,\ns.2 ≠ 'A'"];
+  C5 -> C7 [label="e.0 → s.2 e.0,\ns.2≠'A'"];
+  C8 [label="…", style="rounded,dotted"];
+  C5 -> C8 [label="e.0 → ε"];
+  C9 [label="let e.1 'B' ← e.1 in <DoFab e.1, e.0>"];
+  C6 -> C9;
+  C10 [label="e.1 'B'"];
+  C9 -> C10 [label="let"];
+  C11 [label="<DoFab e.1, e.0>"];
+  C9 -> C11 [label="in"];
+  C11 -> C5 [style="dotted"];
+  C12 [label="let e.1 s.2 ← e.1 in <DoFab e.1, e.0>,\ns.2 ≠ 'A'",
+    style="rounded,dashed"];
+  C7 -> C12;
+}
