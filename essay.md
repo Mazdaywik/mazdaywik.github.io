@@ -1,17 +1,182 @@
-# Опыт умозрительной дистилляции Рефала
+Опыт умозрительной дистилляции Рефала
+=====================================
+
 ![Гони тоску-печаль!](pics/goni.png)
 
-_Hamilton Distillers, Inc. is a private family-owned and operated distillery
-company, founded by Stephen Paul in 2006, headquartered in Tucson, Arizona.
-The company produces and markets three Single Malt Whiskey Del Bac labels.
-Its current distillery facility, called Mash & Chisel, is located in west
-Tucson, Arizona. Hamilton is the first craft distillery established
+_**Hamilton Distillers,** Inc. is a private family-owned and operated
+distillery company, founded by Stephen Paul in 2006, headquartered in Tucson,
+Arizona. The company produces and markets three Single Malt Whiskey Del Bac
+labels. Its current distillery facility, called Mash & Chisel, is located
+in west Tucson, Arizona. Hamilton is the first craft distillery established
 in Southern Arizona since prohibition and the largest Whiskey producer
 in the Tucson metro region._
+
 [Англоязычная Википедия о гамильтоновской дистилляции][en-ham-dist]
 
+Введение
+--------
+
+Недавно я наткнулся на презентацию Гамильтона \[1], где он сравнительно
+понятно описал свою дистиляцию. И задумался, а можно ли переложить эту
+технологию на Рефал. Подумал-подумал, порисовал графы на листиках и понял,
+что можно. В этом документе я продемонстрирую на примерах, как это можно
+сделать.
+
+Текст ниже я пишу для себя и для нескольких своих коллег, поэтому
+предполагается, что читатель знаком с основами суперкомпиляции и знает
+язык Рефал. Если читатель не знаком с суперкомпиляцией, отсылаю его
+к нескольким работам Турчина \[2, 3] и научно-популярной статье Ильи
+Ключникова \[7].
+
+Далее в работе я планирую рассмотреть диалект Рефала, для которого будут
+формулироваться преобразования, на словах описать дистилляцию, как её я
+понял и продемонстрировать её работу на нескольких примерах.
+
+Перестановочный Рефал
+---------------------
+
+Примеры ниже будут описаны на «перестановочном Рефале» — варианте ограниченного
+Рефала, где (а) предложения могут дополняться условиями-отрицаниями,
+и (б) образцы разных предложений не пересекаются. Поэтому он и называется
+перестановочным — можно менять порядок предложений без изменения поведения
+программы.
+
+Для записи буду использовать синтаксис Рефала-5, дополненный этими
+условиями-отрицаниями.
+
+Предложение будет выглядеть следующим образом:
+
+    ОбразцовоеВыражение [ "!" отрицание, … ] "=" Результатное выражение.
+
+Отрицания могут иметь только следующий вид:
+
+    s-переменная "≠" символ
+    символ "≠" s-переменная
+    s-переменная "≠" s-переменная
+
+Символом `ε` я часто буду обозначать пустое выражение.
+
+**Пример.** Функция, которая заменяет `'A'` на `'B'`:
+
+    Fab {
+      'A' e.Tail = 'B' <Fab e.Tail>;
+      s.Other e.Tail ! s.Other ≠ 'A' = s.Other <Fab e.Tail>;
+      ε = ε;
+    }
+
+Порядок предложений можно поменять:
+
+    Fab {
+      ε = ε;
+      s.Other e.Tail ! s.Other ≠ 'A' = s.Other <Fab e.Tail>;
+      'A' e.Tail = 'B' <Fab e.Tail>;
+    }
+
+Семантика функции от этого не изменится.
+
+А вот функция, которая заменяет знаки `'A'` и `'B'` на знак `'C'`:
+
+    Fabc {
+      'A' e.R = 'C' <Fabc e.R>;
+      s.X e.R ! s.X ≠ 'B', 'A' ≠ s.X = s.X <Fabc e.R>;
+      'B' e.R = 'C' <Fabc e.R>;
+      ε = ε;
+    }
+
+Можно показать, что любую функцию на ограниченном Рефале можно преобразовать
+в эквивалентную функцию на перестановочном Рефале. Также можно показать,
+что для любой функции на перестановочном Рефале можно записать эквивалентную
+функцию на ограниченном Рефале, однако, с расширением области определения.
+
+Можно определить преобразование прогонки, замкнутое на перестановочном Рефале.
+При прогонке предложения с отрицаниями вместо переменных подставляются их
+актуальные значения (возможно, обобщённые). Если отрицание обращается
+в тавталогию, оно отбрасывается. Если отрицание становится противоречием,
+уже отбрасывается сама ветвь. В остальных случаях отрицание «вешается» на ветвь
+прогонки, а также добавляется в дочернюю конфигурацию как рестрикция.
+
+Таким образом, перестановочный Рефал будет замкнут относительно суперкомпиляции
+тоже. Можно определить алгоритм суперкомпиляции таким образом, что остаточная
+программа будет в точности сохранять исходную семантику без расширения области
+определения (в отличие от SCP4).
+
+**Примечание.** Наверняка идея перестановочного Рефала давно известна
+в рефал-сообществе, но в письменном виде я её пока ни разу не встречал.
+
+Почему я буду использовать перестановочный Рефал? Во-первых, потому что я его
+недавно для себя придумал и идея мне понравилась. Во-вторых, перестановочность
+ветвей — очень удобное свойство для преобразований программ.
+
+Функции графа суперкомпиляции, в отличие от обычного Рефала, многоместные.
+Поэтому для удобства записи остаточных программ мы будем полагать, что наш
+диалект Рефала также поддерживает многоместные функции — их аргументы
+мы будем разделять запятыми.
+
+**Пример.** Функция замены `'A'` на `'B'` с аргументом-аккумулятором:
+
+    Fab {
+      e.X = <DoFab ε, e.X>;
+    }
+
+    DoFab {
+      e.R, 'A' e.X = <DoFab e.R 'B', e.X>;
+      e.R, s.Z e.X ! s.Z ≠ 'A' = <DoFab e.R s.Z, e.X>;
+      e.R, ε = e.R;
+    }
+
+Запись `<F e.x, e.y, e.z>` можно полагать синтаксическим сахаром для записи
+`<F (e.x) (e.y) (e.z)>` (аналогично трансформируются и образцы с запятыми).
+
+**Примечание.** Ради этих запятых пришлось отделять отрицания от образца
+восклицательным знаком. Если бы не многоместные функции, я бы использовал
+запятую как в обычных условиях Рефала-5.
+
+Свойство перестановочности предложений не очевидно из синтаксиса. Поэтому
+будем полагать, что исполнитель перестановочного Рефала при компиляции
+или перед запуском проверяет тот факт, что все образцы независимы и отвергает
+программы, не удовлетворяющие этому условию. Или что у нас есть препроцессор,
+который преобразует программы на ограниченном Рефале в программы
+на перестановочном.
+
+Далее, когда речь идёт о Рефале, я буду рассматривать перестановочный Рефал.
+
+Неберущийся пример Турчина
+--------------------------
+
+
+
+Литература
+----------
+1. _Program Transformation in a Labelled Transition Systems Framework._
+   G. W. Hamilton, School of Computing Dublin City University Dublin 9,
+   Ireland, September 12, 2016,
+   [(PDF)](https://research.jetbrains.org/files/material/57d7cced3d025.pdf)
+2. Turchin V. F. _The concept of a supercompiler_ // ACM Transactions
+   on Programming Languages and Systems, Volume 8, Issue 3, 1986. —
+   P.292-325., [(PDF)][concept].
+3. V. F. Turchin. _The School «Metacomputation in the Language Refal»._
+   Obninsk, July 11-23, 1990.
+   * _The Basics of Metacomputation. (Chapter 3)_ [(PDF)][school-chap-3]
+   * _The Supercompiler. (Chapter 6)_ [(PDF)][school-chap-6]
+4. V. F. Turchin. _The Language REFAL, the Theory of Compilation,
+   and Metasystem Analysis._ Courant Institute Report #20,
+   New York, 1980, 245 p. [(PDF)][courant]
+5. V. F. Turchin. _Metacomputation: Metasystem transitions plus
+   supercompilation._ In: Partial Evaluation, LNCS vol. 1110, 1996,
+   pp. 481-509. [(PDF)][MST-plus-SCP]
+6. Turchin V. F. _Program Transformation with Metasystem Transitions._
+   J of Functional Programming 3(3) 283-313, 1993. _(PDF в открытом
+   доступе не нашёл)_
+7. Илья Ключников, _Суперкомпиляция: идеи и методы_ // Практика
+   функционального программирования, выпуск 7, апрель 2011.
+   Ссылка: <http://fprog.ru/2011/issue7/>.
 
 
 
 
 [en-ham-dist]: https://en.wikipedia.org/wiki/Hamilton_Distillers
+[concept]: http://s3.amazonaws.com/arena-attachments/1312508/c80fd906ef6f24861e7b7cefae71ca55.pdf
+[school-chap-3]: http://pat.keldysh.ru/~roman/doc/Turchin/1990-Turchin--The_Basics_of_Metacomputation--Obninsk_ch3.pdf
+[school-chap-6]: http://pat.keldysh.ru/~roman/doc/Turchin/1990-Turchin--The_Supercompiler--Obninsk_ch6.pdf
+[courant]: http://pat.keldysh.ru/~roman/doc/Turchin/1980-Turchin--The_Language_REFAL--The_Theory_of_Compilation_and_Metasystem_Analysis.pdf
+[MST-plus-SCP]: http://refal.botik.ru/library/Turchin-Metacomputation_Metasystem_transitions_plus_supercompilation_(LNCS_vol_1110,_1996,_pp_481-509).pdf
