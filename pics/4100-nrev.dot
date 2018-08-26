@@ -1,0 +1,17 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="NIL"];
+  M0 -> M1 [label="t.0 → NIL"];
+  M2;
+  M0 -> M2 [label="t.0 → (t.1 t.0)"];
+  M5 [label="let (t.1 NIL) ← t.3 in M6"];
+  M2 -> M5;
+  M6;
+  M5 -> M6 [label="in"];
+  M7 [label="t.3"];
+  M6 -> M7 [label="t.0 → NIL"];
+  M8 [style="rounded,dashed"];
+  M6 -> M8 [label="t.0 → (t.4 t.0)"];
+}

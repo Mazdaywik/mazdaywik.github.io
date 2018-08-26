@@ -1,0 +1,33 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<Go #t.0#>"];
+  C1 [label="<nrev #t.0#>"];
+  C0 -> C1;
+  C2 [label="let #t.0# ← t.0 in <nrev t.0>"];
+  C1 -> C2;
+  F1 [shape=record, label="{F1:|\<nrev t.0\>}"];
+  C2 -> F1 [label="in"];
+  C3 [label="NIL"];
+  F1 -> C3 [label="t.0 → NIL"];
+  C4 [label="<app <nrev t.0>, (t.1 NIL)>"];
+  F1 -> C4 [label="t.0 → (t.1 t.0)"];
+  C5 [label="let <nrev t.0> ← t.2 in <app t.2, (t.1 NIL)>"];
+  C4 -> C5;
+  C6 [label="<nrev t.0>"];
+  C5 -> C6 [label="let"];
+  C6 -> F1 [label="in", style=dotted];
+  C7 [label="<app t.2, (t.1 NIL)>"];
+  C5 -> C7 [label="in"];
+  C8 [label="let (t.1 NIL) ← t.3 in <app t.2, t.3>"];
+  C7 -> C8;
+  F2 [shape=record, label="{F2:|\<app t.2, t.3\>}"];
+  C8 -> F2 [label="in"];
+  C9 [label="t.3"];
+  F2 -> C9 [label="t.2 → NIL"];
+  C10 [label="(t.4 <app t.2, t.3>)"];
+  F2 -> C10 [label="t.2 → (t.4 t.2)"];
+  C11 [label="let <app t.2, t.3> ← t.5 in (t.4 t.5)"];
+  C10 -> C11;
+  C11 -> F2 [label="let"];
+}
