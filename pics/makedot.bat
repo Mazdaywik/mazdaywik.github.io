@@ -1,1 +1,0 @@
-for %%d in (*.dot) do dot -Tpng %%d -o%%~nd.png
