@@ -1,0 +1,43 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<Go e.0>"];
+  C1 [label="<Fbc <Fab e.0>>"];
+  C0 -> C1;
+  C2 [label="<DoFbc ε, <Fab e.0>>"];
+  C1 -> C2;
+  C3 [label="<DoFbc ε, <DoFab ε, e.0>>"];
+  C2 -> C3;
+  C4 [label="let ε ← e.1 in <DoFbc ε, <DoFab e.1, e.0>>"];
+  C3 -> C4;
+  C5 [shape=record, label="{F1:|\<DoFbc ε, \<DoFab e.1, e.0\>\>}"];
+  C4 -> C5 [label="in"];
+  C6 [label="<DoFbc ε, <DoFab e.1 'B', e.0>>"];
+  C5 -> C6 [label="e.0 → 'A' e.0"];
+  C7 [label="let e.1 'B' ← e.1 in <DoFbc ε, <DoFab e.1, e.0>>"];
+  C6 -> C7;
+  C7 -> C5 [label="in", style=dotted];
+  C8 [label="<DoFbc ε, <DoFab e.1 s.2, e.0>>,\ns.2 ≠ 'A'"];
+  C5 -> C8 [label="e.0 → s.2 e.0,\ns.2 ≠ 'A'"];
+  C9 [label="let e.1 s.2 ← e.1 in <DoFbc ε, <DoFab e.1, e.0>>,\ns.2 ≠ 'A'"];
+  C8 -> C9;
+  C9 -> C5 [label="in", style=dotted];
+  C10 [label="<DoFbc ε, e.1>"];
+  C5 -> C10 [label="e.0 → ε"];
+  C11 [label="let ε ← e.2 in <DoFbc e.2, e.1>"];
+  C10 -> C11;
+  C12 [shape=record, label="{F2:|\<DoFbc e.2, e.1\>}"];
+  C11 -> C12 [label="in"];
+  C13 [label="<DoFbc e.2 'C', e.1>"];
+  C12 -> C13 [label="e.1 → 'B' e.1"];
+  C14 [label="let e.2 'C' ← e.2 in <DoFbc e.2, e.1>"];
+  C13 -> C14;
+  C14 -> C12 [label="in", style=dotted];
+  C15 [label="<DoFbc e.2 s.3, e.1>,\ns.3 ≠ 'B'"];
+  C12 -> C15 [label="e.1 → s.3 e.1,\ns.3 ≠ 'B'"];
+  C16 [label="let e.2 s.3 ← e.2 in <DoFbc e.2, e.1>,\ns.3 ≠ 'B'"];
+  C15 -> C16;
+  C16 -> C12 [label="in", style=dotted];
+  C17 [label="e.2"];
+  C12 -> C17 [label="e.1 → ε"];
+}

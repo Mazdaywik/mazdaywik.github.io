@@ -1,0 +1,21 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="let ε ← e.1 in M2"];
+  M0 -> M1;
+  M2;
+  M1 -> M2 [label="in"];
+  M3 [label="let e.1 'C' ← e.1 in M2"];
+  M2 -> M3 [label="e.0 → 'A' e.0"];
+  M3 -> M2 [label="in", style=dotted];
+  M4 [label="M4,\ns.2 ≠ 'A'"];
+  M2 -> M4 [label="e.0 → s.2 e.0,\ns.2 ≠ 'A'"];
+  M5 [label="…", style="rounded,dotted"];
+  M2 -> M5 [label="e.0 → ε"];
+  M6 [label="let e.1 'C' ← e.1 in M2"];
+  M4 -> M6 [label="s.2 → 'B'"];
+  M6 -> M2 [label="in", style=dotted];
+  M7 [label="M7,\ns.2 ≠ 'A', s.2 ≠ 'B'", style="rounded,dashed"];
+  M4 -> M7 [label="s.2 ≠ 'B'"];
+}
