@@ -1,0 +1,31 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [shape=record, label="{Go:|\<Go\>}"];
+  C1 [label="<F1 ε, 'A' #e.m0#>"];
+  C0 -> C1;
+  C2 [label="<F1 'B', #e.m0#>"];
+  C1 -> C2;
+  C3 [label="let #e.m0# ← e.0 in <F1 'B', e.0>", color=red];
+  C2 -> C3;
+  C4 [label="let ε ← e.1 in <F1 'B' e.1, e.0>"];
+  C3 -> C4;
+  C5 [shape=record, label="{F1:|\<F1 'B' e.1, e.0\>}"];
+  C4 -> C5 [label="in"];
+  C6 [label="<F1 'B' e.1 'B', e.0>"];
+  C5 -> C6 [label="e.0 → 'A' e.0"];
+  C7 [label="let e.1 'B' ← e.1 in <F1 'B' e.1, e.0>"];
+  C6 -> C7;
+  C8 [label="<F1 'B' e.1, e.0>"];
+  C7 -> C8 [label="in"];
+  C8 -> C5 [style=dotted];
+  C9 [label="<F1 'B' e.1 s.2, e.0>,\ns.2 ≠ 'A'"];
+  C5 -> C9 [label="e.0 → s.2 e.0,\ns.2 ≠ 'A'"];
+  C10 [label="let e.1 s.2 ← e.1 in <F1 'B' e.1, e.0>,\ns.2 ≠ 'A'"];
+  C9 -> C10
+  C10 -> C8 [label="in"];
+  C11 [label="<F1 'B' e.1, ε>"];
+  C5 -> C11 [label="e.0 → ε"];
+  C12 [label="#e.m1# 'B' e.1", color=red];
+  C11 -> C12;
+}

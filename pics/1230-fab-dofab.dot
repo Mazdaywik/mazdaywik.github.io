@@ -1,0 +1,16 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="let ε ← e.m1 in M2"];
+  M0 -> M1;
+  M1 -> M2 [label="in"];
+  M3 [label="let e.m1 'B' ← e.m1 in M2"];
+  M2 -> M3 [label="e.m0 → 'A' e.m0"];
+  M3 -> M2 [label="in"];
+  M4 [label="let e.m1 s.m2 ← e.m1 in M2"];
+  M2 -> M4 [label="e.m0 → s.m2 e.m0,\ns.m2 ≠ 'A'"];
+  M4 -> M2 [label="in"];
+  M5 [label="e.m1"];
+  M2 -> M5 [label="e.m0 → ε"];
+}

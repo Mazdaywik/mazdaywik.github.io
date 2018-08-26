@@ -15,7 +15,7 @@ digraph {
   C6 [label="<DoFab e.1 'B', e.0>"];
   C5 -> C6 [label="e.0 → 'A' e.0"];
   C7 [label="<DoFab e.1 s.2, e.0>,\ns.2 ≠ 'A'"];
-  C5 -> C7 [label="e.0 → s.2 e.0,\ns.2≠'A'"];
+  C5 -> C7 [label="e.0 → s.2 e.0,\ns.2 ≠ 'A'"];
   C8 [label="<DoFab e.1, ε>"];
   C5 -> C8 [label="e.0 → ε"];
   C9 [label="let e.1 'B' ← e.1 in <DoFab e.1, e.0>"];

@@ -1,0 +1,9 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [shape=record, label="{Go:|\<Go\>}"];
+  C1 [label="<F1 ε, ε>"];
+  C0 -> C1;
+  C2 [label="#e.m1#"];
+  C1 -> C2;
+}
