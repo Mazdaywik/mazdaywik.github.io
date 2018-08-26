@@ -27,7 +27,7 @@ digraph {
   C11 -> C5 [style="dotted"];
   C12 [label="let e.1 s.2 ← e.1 in <DoFab e.1, e.0>,\ns.2 ≠ 'A'"];
   C7 -> C12;
-  C13 [label="e.1 s.2"];
+  C13 [label="e.1 s.2,\ns.2 ≠ 'A'"];
   C12 -> C13 [label="let"];
   C12 -> C11 [label="in"];
   C14 [label="e.1"];
