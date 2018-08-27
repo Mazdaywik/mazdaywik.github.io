@@ -1,0 +1,23 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<Fib #e.0#>"];
+  C1 [label="let #e.0# ← e.0 in <Fib e.0>"];
+  C0 -> C1;
+  F1 [shape=record, label="{F1:|\<Fib e.0\>}"];
+  C1 -> F1 [label="in"];
+  C2 [label="I"];
+  F1 -> C2 [label="e.0 → ε"];
+  C3 [label="<Fib I e.0>"];
+  F1 -> C3 [label="e.0 → I e.0"];
+  F2 [shape=record, label="{F2:|\<Fib1 I e.0\>}"];
+  C3 -> F2;
+  C4 [label="I"];
+  F2 -> C4 [label="e.0 → ε"];
+  C5 [label="<Fib I e.0> <Fib e.0>"];
+  F2 -> C5 [label="e.0 → I e.0"];
+  C6 [label="let <Fib I e.0> ← e.1, <Fib e.0> ← e.2 in e.1 e.2"];
+  C5 -> C6;
+  C6 -> F2 [label="let e.1", style=dotted];
+  C6 -> F1 [label="let e.2", style=dotted];
+}

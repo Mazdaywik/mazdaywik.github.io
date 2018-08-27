@@ -1,0 +1,9 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="I"];
+  M0 -> M1 [label="e.0 → ε"];
+  M2 [style="rounded,dashed"];
+  M0 -> M2 [label="e.0 → I e.0"];
+}
