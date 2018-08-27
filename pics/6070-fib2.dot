@@ -1,0 +1,11 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  F1 [label="…", shape=none];
+  C6 [label="<F1 <F2 e.1, ε>, ε>"];
+  F1 -> C6;
+  C7 [label="I <F2 e.1, ε>"];
+  C6 -> C7;
+  C8 [label="I I e.1"];
+  C7 -> C8;
+}

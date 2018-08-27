@@ -1,0 +1,29 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<Go>"];
+  C1 [label="<F1 I #e.0#> #e.1#"];
+  C0 -> C1;
+  C2 [label="let <F1 I #e.0#> ← e.1 in e.1 #e.1#"];
+  C1 -> C2;
+  C3 [label="<F1 I #e.0#>"];
+  C2 -> C3 [label="let"];
+  C4 [label="<F2 #e.0#>"];
+  C3 -> C4;
+  C5 [label="let #e.0# ← e.0 in <F2 e.0>"];
+  C4 -> C5;
+  F1 [shape=record, label="{F1:|\<F2 e.0\>}"];
+  C5 -> F1 [label="in"];
+  C6 [label="I"];
+  F1 -> C6 [label="e.0 → ε"];
+  C7 [label="<F2 e.0> <F1 e.0>"];
+  F1 -> C7 [label="e.0 → I e.0"];
+  C8 [label="let <F2 e.0> ← e.2, <F1 e.0> ← e.3 in e.2 e.3"];
+  C7 -> C8;
+  C8 -> F1 [label="let e.2", style=dotted];
+  F2 [shape=record, label="{F2:|\<F1 e.0\>}"];
+  C8 -> F2 [label="let e.3"];
+  C9 [label="I"];
+  F2 -> C9 [label="e.0 → ε"];
+  F2 -> F1 [label="e.0 → I e.0", style=dotted];
+}

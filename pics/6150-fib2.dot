@@ -1,0 +1,15 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="I"];
+  M0 -> M1 [label="e.0 → ε"];
+  M3 [label="let ε ← e.1, ε ← e.2 in M8"];
+  M0 -> M3 [label="e.0 → I e.0"];
+  M3 -> M8 [label="in"];
+  M9 [label="I #e.1#"]
+  M8 -> M9 [label="e.0 → ε"];
+  M11 [label="let e.1 I e.2 ← e.1, e.1 ← e.2 in M8"];
+  M8 -> M11 [label="e.0 → I e.0"];
+  M11 -> M8 [label="in", style=dotted];
+}

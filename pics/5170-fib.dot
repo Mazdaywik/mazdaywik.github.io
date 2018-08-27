@@ -1,0 +1,17 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="let ε ← e.1 in M10"];
+  M0 -> M1;
+  M10;
+  M1 -> M10 [label="in"];
+  M11 [label="I e.1"];
+  M10 -> M11 [label="e.0 → ε"];
+  M12;
+  M10 -> M12 [label="e.0 -> I e.0"];
+  M13 [style="rounded,dashed"];
+  M12 -> M13 [label="e.0 → ε"];
+  M14 [label="…", style="rounded,dotted"];
+  M12 -> M14 [label="e.0 -> I e.0"];
+}
