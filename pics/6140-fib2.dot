@@ -14,7 +14,7 @@ digraph {
   M5 -> M6;
   M8;
   M6 -> M8 [label="in"];
-  M9 [label="I #e.1#"]
+  M9 [label="I e.1"]
   M8 -> M9 [label="e.0 → ε"];
   M10;
   M8 -> M10 [label="e.0 → I e.0"];

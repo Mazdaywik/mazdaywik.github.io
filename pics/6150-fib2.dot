@@ -7,7 +7,7 @@ digraph {
   M3 [label="let ε ← e.1, ε ← e.2 in M8"];
   M0 -> M3 [label="e.0 → I e.0"];
   M3 -> M8 [label="in"];
-  M9 [label="I #e.1#"]
+  M9 [label="I e.1"]
   M8 -> M9 [label="e.0 → ε"];
   M11 [label="let e.1 I e.2 ← e.1, e.1 ← e.2 in M8"];
   M8 -> M11 [label="e.0 → I e.0"];
