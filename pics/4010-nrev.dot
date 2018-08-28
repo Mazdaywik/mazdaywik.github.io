@@ -16,7 +16,7 @@ digraph {
   C4 -> C5;
   C6 [label="<nrev t.0>"];
   C5 -> C6 [label="let"];
-  C6 -> F1 [label="in", style=dotted];
+  C6 -> F1 [style=dotted];
   C7 [label="<app t.2, (t.1 NIL)>"];
   C5 -> C7 [label="in"];
   C8 [label="let (t.1 NIL) ← t.3 in <app t.2, t.3>"];
@@ -29,5 +29,5 @@ digraph {
   F2 -> C10 [label="t.2 → (t.4 t.2)"];
   C11 [label="let <app t.2, t.3> ← t.5 in (t.4 t.5)"];
   C10 -> C11;
-  C11 -> F2 [label="let"];
+  C11 -> F2 [label="let", style=dotted];
 }
