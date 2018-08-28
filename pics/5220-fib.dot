@@ -14,7 +14,6 @@ digraph {
   M12 -> M13 [label="e.0 → ε"];
   M14 [label="let M10 ← e.1 in M12"];
   M12 -> M14 [label="e.0 -> I e.0"];
-  M15;
   M14 -> M10 [label="let", style=dotted];
   M14 -> M12 [label="in", style=dotted];
 }
