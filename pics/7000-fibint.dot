@@ -1,0 +1,37 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<F1 I I [I I I]>"];
+  C1 [label="<Add <F1 [I I I]> <F1 I [I I I]>>"];
+  C0 -> C1;
+  C2 [label="let [I I I] ← e.0 in <Add <F1 e.0> <F1 I e.0>>"];
+  C1 -> C2;
+  F1 [shape=record, label="{F1:|\<Add \<F1 e.0\> \<F1 I e.0\>\>}"];
+  C2 -> F1 [label="in"];
+  C3 [label="<Add <F1> <F1 I>>"]
+  F1 -> C3 [label="e.0 → ε"];
+  C4 [label="<Add 1 1>"];
+  C3 -> C4;
+  C5 [label="2"];
+  C4 -> C5;
+  C6 [label="<Add <F1 I> <F1 I I>>"];
+  F1 -> C6 [label="e.0 → I"];
+  C7 [label="…", shape=none];
+  C6 -> C7;
+  C8 [label="3"];
+  C7 -> C8;
+  C9 [label="<Add <F1 I I e.0> <F1 I I I e.0>>"];
+  F1 -> C9 [label="e.0 → I I e.0"];
+  C10 [label="<Add <Add <F1 e.0> <F1 I e.0>> <F1 I I I e.0>>"];
+  C9 -> C10;
+  C11 [label="let <Add <F1 e.0> <F1 I e.0>> ← e.1,\n<F1 I I I e.0> ← e.2\nin <Add e.1 e.2>"];
+  C10 -> C11;
+  C11 -> F1 [label="let, e.1", style=dotted];
+  C12 [label="<F1 I I I e.0>"];
+  C11 -> C12 [label="let, e.2"];
+  C13 [label="<Add <F1 I e.0> <F1 I I e.0>>"];
+  C12 -> C13;
+  C14 [label="let I e.0 ← e.0 in <Add <F1 e.0> <F1 I e.0>>"];
+  C13 -> C14;
+  C14 -> F1 [label="in", style=dotted];
+}
