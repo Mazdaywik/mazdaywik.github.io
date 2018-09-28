@@ -879,7 +879,7 @@ in the Tucson metro region._
 
     F2 {
       'B', e.1 = <F3 ε, e.1>;
-      s.2 ! s.2 ≠ 'A' = <F4 ε, s.2, e.1>;
+      s.2, e.1 ! s.2 ≠ 'B' = <F4 ε, s.2, e.1>;
     }
 
     F3 {

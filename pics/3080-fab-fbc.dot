@@ -35,7 +35,7 @@ digraph {
   C13 [label="<F2 'C', e.1>", color=blue];
   F2 -> C13 [label="s.2 → 'B'", color=blue];
   C14 [label="<F2 s.2, e.1>,\ns.2 ≠ A, s.2 ≠ 'B'", color=blue];
-  F2 -> C14 [label="s.2 ≠ 'A'", color=blue];
+  F2 -> C14 [label="s.2 ≠ 'B'", color=blue];
   C15 [label="let ε ← e.3 in <F2 'C' e.3, e.1>"];
   C13 -> C15;
   F3 [shape=record, label="{F3:|\<F2 'C' e.3, e.1\>}"];
