@@ -747,3 +747,142 @@ _Александр Коновалов, сентябрь 2018_
 Нетрудно заметить, что здесь тоже на каждом шаге уровень вложенности входного
 аргумента уменьшается на единицу, а значит, вычисления тоже выполняются
 линейно.
+
+
+Двойной проход по списку
+------------------------
+
+Рассмотрим программу, которая делает два прохода по строке, заменяя в ней
+сначала `'A'` на `'B'`, а потом `'B'` на `'C'`:
+
+    Fabc { e.X = <Fbc <Fab e.X>> }
+
+    Fab { e.X = <DoFab ε, eX> }
+
+    DoFab {
+      e.Res, 'A' e.Arg = <DoFab e.Res 'B', e.Arg>;
+      e.Res, s.Y e.Arg ! s.Y ≠ 'A' = <DoFab e.Res s.Y, e.Arg>;
+      e.Res, ε = e.Res;
+    }
+
+    Fbc { e.X = <DoFbc ε, e.X> }
+
+    DoFbc {
+      e.Res, 'B' e.Arg = <DoFbc e.Res 'C', e.Arg>;
+      e.Res, s.Y e.Arg ! s.Y ≠ 'B' = <DoFbc e.Res s.Y, e.Arg>;
+      e.Res, ε = e.Res;
+    }
+
+Эта программа выполняется и так за линейное время, ускорить её никак нельзя.
+Но пример рассмотреть нужно, поскольку он продемонстрирует некоторые тонкости
+работы нашего интерпретатора.
+
+Рассмотрим вычисление функции `<Fabc 'BARDAK'>`. Запускаем интерпретатор:
+
+    <Int
+      ↓ <Fabc 'BARDAK'>
+      ,
+      ↓ Fabc { e.X = <Fbc <Fab e.X>> }
+      ↓
+      ↓ Fab { e.X = <DoFab ε, eX> }
+      ↓
+      ↓ DoFab {
+      ↓   e.Res, 'A' e.Arg = <DoFab e.Res 'B', e.Arg>;
+      ↓   e.Res, s.Y e.Arg ! s.Y ≠ 'A' = <DoFab e.Res s.Y, e.Arg>;
+      ↓   e.Res, ε = e.Res;
+      ↓ }
+      ↓
+      ↓ Fbc { e.X = <DoFbc ε, e.X> }
+      ↓
+      ↓ DoFbc {
+      ↓   e.Res, 'B' e.Arg = <DoFbc e.Res 'C', e.Arg>;
+      ↓   e.Res, s.Y e.Arg ! s.Y ≠ 'B' = <DoFbc e.Res s.Y, e.Arg>;
+      ↓   e.Res, ε = e.Res;
+      ↓ }
+    >
+
+    <Int-Loop
+      <Scp
+        ↓ Go { = <Fabc e.['BARDAK']> }
+        ↓
+        ↓ Fabc { e.X = <Fbc <Fab e.X>> }
+        ↓
+        ↓ Fab { e.X = <DoFab ε, eX> }
+        ↓
+        ↓ DoFab {
+        ↓   e.Res, 'A' e.Arg = <DoFab e.Res 'B', e.Arg>;
+        ↓   e.Res, s.Y e.Arg ! s.Y ≠ 'A' = <DoFab e.Res s.Y, e.Arg>;
+        ↓   e.Res, ε = e.Res;
+        ↓ }
+        ↓
+        ↓ Fbc { e.X = <DoFbc ε, e.X> }
+        ↓
+        ↓ DoFbc {
+        ↓   e.Res, 'B' e.Arg = <DoFbc e.Res 'C', e.Arg>;
+        ↓   e.Res, s.Y e.Arg ! s.Y ≠ 'B' = <DoFbc e.Res s.Y, e.Arg>;
+        ↓   e.Res, ε = e.Res;
+        ↓ }
+      >
+    >
+
+Граф суперкомпиляции рассматривать не буду, поскольку его можно найти
+[в предыдущем эссе](essay.md). Следующий шаг:
+
+    <Int-Loop
+      ↓ Go { = <F1 ε, e.['BARDAK']> }
+      ↓
+      ↓ F1 {
+      ↓   e.1, 'A' e.0 = <F1 e.1 'B', e.0>;
+      ↓   e.1, s.2 e.0 ! s.2 ≠ 'A' = <F1 e.1 s.2, e.0>;
+      ↓   e.1, ε = <F2 ε, e.1>;
+      ↓ }
+      ↓
+      ↓ F2 {
+      ↓   e.3, 'B' e.1 = <F2 e.3 'C', e.1>;
+      ↓   e.3, s.4 e.1 ! s.4 ≠ 'B' = <F2 e.3 s.4, e.1>;
+      ↓   e.3, ε = e.3;
+      ↓ }
+    >
+
+Параметр `e.['BARDAK']` падает в функцию `F1`, где по его значению происходит
+ветвление. Строим клэши:
+
+    'BARDAK' : 'A' e.0             => fail
+    'BARDAK' : s.2 e.0 ! s.2 ≠ 'A' => 'B' ← s.2, 'ARDAK' ← e.0
+    'BARDAK' : ε                   => fail
+
+Разбиваем параметр на `s.['B'] e.['ARDAK']`:
+
+    <Int-Loop
+      <Scp
+        ↓ Go { = <F1 ε, s.['B'] e.['ARDAK']> }
+        ↓
+        ↓ F1 {
+        ↓   e.1, 'A' e.0 = <F1 e.1 'B', e.0>;
+        ↓   e.1, s.2 e.0 ! s.2 ≠ 'A' = <F1 e.1 s.2, e.0>;
+        ↓   e.1, ε = <F2 ε, e.1>;
+        ↓ }
+        ↓
+        ↓ F2 {
+        ↓   e.3, 'B' e.1 = <F2 e.3 'C', e.1>;
+        ↓   e.3, s.4 e.1 ! s.4 ≠ 'B' = <F2 e.3 s.4, e.1>;
+        ↓   e.3, ε = e.3;
+        ↓ }
+      >
+    >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
