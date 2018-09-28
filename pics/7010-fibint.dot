@@ -1,10 +1,12 @@
 digraph {
   node [shape=box, style=rounded];
 
-  C0 [label="<F1 I I [I I I]>"];
-  C1 [label="<Add <F1 [I I I]> <F1 I [I I I]>>"];
+  Go [label="<Go>"];
+  C0 [label="<F1 I I [I]>"];
+  Go -> C0;
+  C1 [label="<Add <F1 e.[I]> <F1 I e.[I]>>"];
   C0 -> C1;
-  C2 [label="let [I I I] ← e.0 in <Add <F1 e.0> <F1 I e.0>>"];
+  C2 [label="let e.[I] ← e.0 in <Add <F1 e.0> <F1 I e.0>>"];
   C1 -> C2;
   F1 [shape=record, label="{F1:|\<Add \<F1 e.0\> \<F1 I e.0\>\>}"];
   C2 -> F1 [label="in"];
