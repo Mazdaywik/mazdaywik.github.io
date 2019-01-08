@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="f(x, x)"];
+  G1 [label="c0(c1(Z))"];
+  C0 -> G1;
+  C1 [label="c0(B(A(c1(Z))))"];
+  G1 -> C1 [label="x → A(x)"];
+  G1 -> C1 [label="c0 → c0·B,\nc1 → A·c1", style=dotted];
+  C2 [label="…", style="dotted,rounded"];
+  G1 -> C2 [label="x → Z"];
+  G1 -> C2 [label="c0 → id,\nc1 → id", style=dotted];
+}

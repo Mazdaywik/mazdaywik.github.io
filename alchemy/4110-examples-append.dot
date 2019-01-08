@@ -1,0 +1,16 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="length(append(xs, xs))"];
+  L1 [label="let id ← c1, id ← c2 in\nc1(length(append(xs, c2(xs))))\nc1·S = S·c1"];
+  C0 -> L1;
+  G1 [label="c1(length(append(xs, c2(xs))))\nc1·S = S·c1"];
+  L1 -> G1;
+  C1 [label="c1(length(c2(Nil)))\nc1·S = S·c1"];
+  G1 -> C1 [label="xs → Nil"];
+  C2 [label="c1(S(length(append(xs, c2(Cons(v1, xs))))))\nc1·S = S·c1"];
+  G1 -> C2 [label="xs → Cons(v1, xs)"];
+  L2 [label="let c1·S ← c1, c2·Cons(v1, •) ← c2 in\nc1(length(append(xs, c2(xs))))\nc1·S = S·c1"]
+  C2 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+}

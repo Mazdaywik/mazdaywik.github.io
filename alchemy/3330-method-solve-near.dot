@@ -1,0 +1,31 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="f(x, x)"];
+  C1 [label="c0(c1(Z))"];
+  C0 -> C1;
+  L1 [label="let c1(Z) ← v1 in c0(v1)"];
+  C1-> L1;
+
+  G1 [label="c1(Z)"];
+  L1 -> G1 [label="let"];
+
+  G2 [label="c0(v1)"];
+  L1 -> G2 [label="in"];
+
+  C2 [label="…", style="dotted,rounded"];
+  G1 -> C2 [label="x → A(x)"];
+  G1 -> C2 [label="c0 → c0·B,\nc1 → A·c1", style=dotted];
+
+  C3 [label="…", style="dotted,rounded"];
+  G1 -> C3 [label="x → Z"];
+  G1 -> C3 [label="c0 → id,\nc1 → id", style=dotted];
+
+  C4 [label="…", style="dotted,rounded"];
+  G2 -> C4 [label="x → A(x)"];
+  G2 -> C4 [label="c0 → c0·B,\nc1 → A·c1", style=dotted];
+
+  C5 [label="…", style="dotted,rounded"];
+  G2 -> C5 [label="x → Z"];
+  G2 -> C5 [label="c0 → id,\nc1 → id", style=dotted];
+}

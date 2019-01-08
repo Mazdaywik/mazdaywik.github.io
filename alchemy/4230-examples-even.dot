@@ -1,0 +1,30 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="even(add(n, n))"];
+  G1 [shape=record, label="{g1:|even(c1(Z))\nc1·S = S·c1}"];
+  C0 -> G1;
+
+  C1 [label="even(id(Z))"];
+  G1 -> C1 [label="n → Z"];
+  G1 -> C1 [label="c1 → id", style=dotted];
+
+  G2 [shape=record, label="{g2:|even(c1(Z))\nc1·S = S·c1}"];
+  G1 -> G2 [label="n → S(n)"];
+  G2 -> C1 [label="n → Z"];
+  G2 -> C1 [label="c1 → id", style=dotted];
+  C2 [label="even(S(S(c1(Z))))\nc1·S = S·c1"];
+  G2 -> C2 [label="n → S(n)"];
+  G1 -> C2 [label="c1 → S·S·c1", style=dotted];
+
+  C3 [label="even(Z)"];
+  C1 -> C3;
+  C4 [label="Even"];
+  C3 -> C4;
+
+  C5 [label="odd(S(c1(Z)))\nc1·S = S·c1"];
+  C2 -> C5;
+  C6 [label="even(c1(Z))\nc1·S = S·c1"];
+  C5 -> C6;
+  C6 -> G1 [style=dashed];
+}

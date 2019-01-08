@@ -1,0 +1,11 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="length(append(xs, xs))", color=red];
+  C1 [label="length(Nil)"];
+  C0 -> C1 [label="xs → Nil"];
+  C2 [label="Z"];
+  C1 -> C2;
+  C3 [label="S(length(append(xs, Cons(v1, xs))))", color=red];
+  C0 -> C3 [label="xs → Cons(v1, xs)"];
+}

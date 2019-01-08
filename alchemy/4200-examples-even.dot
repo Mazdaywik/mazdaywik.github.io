@@ -1,0 +1,20 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="even(add(n, n))", color=red];
+  C1 [label="even(Z)"];
+  C0 -> C1 [label="n → Z"];
+  C2 [label="Even"];
+  C1 -> C2;
+  C3 [label="even(S(add(n, S(n))))"];
+  C0 -> C3 [label="n → S(n)"];
+  C4 [label="odd(add(n, S(n)))"];
+  C3 -> C4;
+  C5 [label="odd(S(Z))"];
+  C4 -> C5 [label="n → Z"];
+  C5 -> C1;
+  C6 [label="odd(S(add(n, S(S(n)))))"];
+  C4 -> C6 [label="n → S(n)"];
+  C7 [label="even(add(n, S(S(n))))", color=red];
+  C6 -> C7;
+}

@@ -1,0 +1,15 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="f(x, x)"];
+  L1 [label="let id ← c0 in f(x, c0(x))"];
+  C0 -> L1;
+  G1 [label="f(x, c0(x))"];
+  L1 -> G1 [label="in"];
+  C1 [label="f(x, B(c0(A(x))))"];
+  G1 -> C1 [label="x → A(x)"];
+  C2 [label="…", style="dotted,rounded"];
+  G1 -> C2 [label="x → Z"];
+  C3 [label="f(x, (B·c0·A)(x))"];
+  C1 -> C3;
+}

@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="rev(lst, Nil)"];
+  C1 [label="(rev(lst, •))(Nil)"];
+  C0 -> C1;
+  C2 [label="(rev(lst, Cons(v1, •)))(Nil)"];
+  C1 -> C2 [label="lst → Cons(v1, lst)"];
+  C3 [label="(rev(lst, •)·Cons(v1, •))(Nil)"];
+  C2 -> C3;
+  C4 [label="…", style="rounded,dotted"];
+  C1 -> C4 [label="lst → Nil"];
+}

@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="add(a, a)"];
+  G1 [label="c1(c1(Z))\nc1·S = S·c1"];
+  C0 -> G1;
+  C1 [label="…", style="dotted,rounded"];
+  G1 -> C1 [label="a → Z"];
+  G1 -> C1 [label="c1 → id", style=dotted];
+  C2 [label="…", style="dotted,rounded"];
+  G1 -> C2 [label="a → S(a)"];
+  G1 -> C2 [label="c1 → S·c1", style=dotted];
+}

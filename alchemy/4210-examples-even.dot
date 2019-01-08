@@ -1,0 +1,27 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="even(add(n, n))"];
+  L1 [label="let id ← c1 in even(add(n, c1(n)))\nc1·S = S·c1"];
+  C0 -> L1;
+  G1 [label="even(add(n, c1(n)))\nc1·S = S·c1"];
+  L1 -> G1 [label="in"];
+  C1 [label="even(c1(Z))\nc1·S = S·c1"];
+  G1 -> C1 [label="n → Z"];
+  C2 [label="even(S(add(n, c1(S(n)))))\nc1·S = S·c1"];
+  G1 -> C2 [label="n → S(n)"];
+  G2 [label="odd(add(n, c1(S(n))))\nc1·S = S·c1"];
+  C2 -> G2;
+  C3 [label="odd(c1(S(Z)))\nc1·S = S·c1"];
+  G2 -> C3 [label="n → Z"];
+  C4 [label="odd(S(c1(Z)))\nc1·S = S·c1"];
+  C3 -> C4 [style=bold, color=green];
+  C4 -> C1;
+  C5 [label="odd(S(add(n, c1(S(S(n))))))\nc1·S = S·c1"];
+  G2 -> C5 [label="n → S(n)"];
+  C6 [label="even(add(n, c1(S(S(n)))))\nc1·S = S·c1"];
+  C5 -> C6;
+  L2 [label="let c1·S·S ← c1 in even(add(n, c1(n)))\nc1·S = S·c1"];
+  C6 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+}

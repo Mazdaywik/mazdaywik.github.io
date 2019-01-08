@@ -1,0 +1,18 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [shape=record, label="{g1:|g1(n)}"];
+  C1 [label="I"];
+  G1 -> C1 [label="n → Z"];
+  G2 [shape=record, label="{g2:|g2(n)}"];
+  G1 -> G2 [label="n → S(n)"];
+  G2 -> C1 [label="n → Z"];
+  G3 [label="g4(g3(n))", color=red];
+  G2 -> G3 [label="n → S(n)"];
+  C2 [label="g4(T2(I, I))"];
+  G3 -> C2 [label="n → Z"];
+  C3 [label="Plus(I, I)"];
+  C2 -> C3;
+  C4 [label="g4(g5(g3(n)))", color=red];
+  G3 -> C4 [label="n → S(n)"];
+}

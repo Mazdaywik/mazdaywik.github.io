@@ -1,0 +1,14 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="fab(x)"];
+  G1 [label="c1(Nil)\nc1·B = B·c1"];
+  C0 -> G1;
+  C1 [label="…\nc1·B = B·c1", style="dotted,rounded"];
+  G1 -> C1 [label="x → A(x)"];
+  G1 -> C1 [label="x → B(x)"];
+  G1 -> C1 [label="c1 → B·c1", style=dotted];
+  C2 [label="…\nc1·B = B·c1", style="dotted,rounded"];
+  G1 -> C2 [label="x → Nil"];
+  G1 -> C2 [label="c1 → id", style=dotted];
+}

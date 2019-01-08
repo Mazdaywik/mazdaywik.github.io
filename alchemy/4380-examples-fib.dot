@@ -1,0 +1,39 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [shape=record, label="{g1:|g1(n)}"];
+  C1 [label="I"];
+  G1 -> C1 [label="n → Z"];
+  G2 [shape=record, label="{g2:|g2(n)}"];
+  G1 -> G2 [label="n → S(n)"];
+  G2 -> C1 [label="n → Z"];
+  C1a [label="g4(c1(T2(I, I)))\nc1·g5 = g5·c1"];
+  G2 -> C1a [label="n → S(n)"];
+  L1 [label="let I ← v1 in g4(c1(T2(v1, I)))\nc1·g5 = g5·c1"];
+  C1a -> L1;
+  C1b [label="g4(c1(T2(v1, I)))\nc1·g5 = g5·c1"];
+  L1 -> C1b [label="in"];
+  L2 [label="let I ← v2 in g4(c1(T2(v1, v2)))\nc1·g5 = g5·c1"];
+  C1b -> L2;
+  G3 [label="g4(c1(T2(v1, v2)))\nc1·g5 = g5·c1", color=red];
+  L2 -> G3 [label="in"];
+
+  C2 [label="g4(id(T2(v1, v2)))"];
+  G3 -> C2 [label="n → Z"];
+  G3 -> C2 [label="c1 → id", style=dotted];
+
+  C3 [label="g4(g5(c1(T2(v1, v2))))\nc1·g5 = g5·c1"];
+  G3 -> C3 [label="n → S(n)"];
+  G3 -> C3 [label="c1 → g5·c1", style=dotted];
+
+  C4 [label="g4(T2(v1, v2))"];
+  C2 -> C4;
+  C5 [label="Plus(v1, v2)"];
+  C4 -> C5;
+
+  C6 [label="g4(c1(g5(T2(v1, v2))))\nc1·g5 = g5·c1"];
+  C3 -> C6 [style=bold, color=green];
+
+  C7 [label="g4(c1(T2(Plus(v1, v2), v1)))\nc1·g5 = g5·c1", color=red];
+  C6 -> C7;
+}

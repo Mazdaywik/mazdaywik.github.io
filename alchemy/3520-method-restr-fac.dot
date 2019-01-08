@@ -1,0 +1,25 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="fac(x)"];
+  L1 [label="let id ← c1 in c1(fac(x))"];
+  C0 -> L1;
+  G1 [label="c1(fac(x))"];
+  L1 -> G1 [label="in"];
+  C1 [label="c1(C(fac(x)))"];
+  G1 -> C1 [label="x → A(x)"];
+  C2 [label="c1(B(fac(x)))"];
+  G1 -> C2 [label="x → B(x)"];
+  C3 [label="c1(Nil)"];
+  G1 -> C3 [label="x → Nil"];
+  C4 [label="(c1·C)(fac(x))"];
+  C1 -> C4;
+  L2 [label="let c1·C ← c1 in c1(fac(x))"];
+  C4 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  C5 [label="(c1·B)(fac(x))"];
+  C2 -> C5;
+  L3 [label="let c1·B ← c1 in c1(fac(x))"];
+  C5 -> L3;
+  L3 -> G1 [label="in", style=dashed];
+}

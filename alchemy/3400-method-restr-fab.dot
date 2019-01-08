@@ -1,0 +1,11 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="fab(x)"];
+  C1 [label="B(fab(x))"];
+  C0 -> C1 [label="x → A(x)"];
+  C2 [label="…", style="dotted,rounded"];
+  C0 -> C2 [label="x → B(x)"];
+  C3 [label="…", style="dotted,rounded"];
+  C0 -> C3 [label="x → Nil"];
+}

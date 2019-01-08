@@ -1,0 +1,18 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="add(x, y)"];
+  L1 [label="let id ← c0 in add(x, c0(y))"];
+  C0 -> L1;
+  G1 [label="add(x, c0(y))"];
+  L1 -> G1 [label="in"];
+  C1 [label="add(x, S(c0(y)))"];
+  G1 -> C1 [label="x → S(x)"];
+  C2 [label="add(x, (S·c0)(y))"];
+  C1 -> C2;
+  L2 [label="let S·c0 ← c0 in add(x, c0(y))"];
+  C2 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  C3 [label="c0(y)"];
+  G1 -> C3 [label="x → Z"];
+}

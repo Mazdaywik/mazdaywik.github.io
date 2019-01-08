@@ -1,0 +1,27 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [shape=record, label="{g1:|fib(n)}"];
+  C1 [label="I"];
+  G1 -> C1 [label="n → Z"];
+  G2 [shape=record, label="{g2:|aux(n)}"];
+  G1 -> G2 [label="n → S(n)"]
+  G2 -> C1 [label="n → Z"];
+  C2 [label="Plus(aux(n), fib(n))"]
+  G2 -> C2 [label="n → S(n)"];
+  L1 [label="let <aux(n), fib(n)> ← <v1, v2> in Plus(v1, v2)"];
+  C2 -> L1;
+  G3 [shape=record, label="{g3:|\<aux(n), fib(n)\>}"];
+  L1 -> G3 [label="let"];
+  G4 [shape=record, label="{g4:|Plus(v1, v2)}"];
+  L1 -> G4 [label="in"];
+  C3 [label="<I, I>"];
+  G3 -> C3 [label="n → Z"];
+  C4 [label="<Plus(aux(n), fib(n)), aux(n)>"];
+  G3 -> C4 [label="n → S(n)"];
+  L2 [label="let <aux(n), fib(n)> ← <v1, v2> in <Plus(v1, v2), v1>"];
+  C4 -> L2;
+  L2 -> G3 [label="let", style=dashed];
+  G5 [shape=record, label="{g5:|\<Plus(v1, v2), v1\>}"];
+  L2 -> G5 [label="in"];
+}

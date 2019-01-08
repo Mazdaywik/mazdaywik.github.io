@@ -1,0 +1,22 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="rev(lst, Nil)"];
+  F1 [shape=record, label="{f1:|c1(Nil)}"];
+  C0 -> F1;
+  L1 [label="let Nil ← v2 in c1(v2)"];
+  F1 -> L1;
+  G1 [shape=record, label="{g1:|c1(v2)}"];
+  L1 -> G1 [label="in"];
+  C1 [label="c1(Cons(v1, v2))"];
+  G1 -> C1 [label="lst → Cons(v1, lst)"];
+  G1 -> C1 [label="c1 → c1·Cons(v1, •)", style=dotted];
+  C2 [label="id(v2)"];
+  G1 -> C2 [label="lst → Nil"];
+  G1 -> C2 [label="c1 → id", style=dotted];
+  L2 [label="let Cons(v1, v2) ← v2 in c1(v2)"];
+  C1 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  C3 [label="v2"];
+  C2 -> C3;
+}

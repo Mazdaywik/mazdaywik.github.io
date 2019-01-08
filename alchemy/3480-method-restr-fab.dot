@@ -1,0 +1,29 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="fab(x)"];
+  F1 [shape=record, label="{f1:|c1(Nil)\nc1·B = B·c1}"];
+  C0 -> F1;
+  L1 [label="let Nil ← v1 in c1(v1)\nc1·B = B·c1"];
+  F1 -> L1;
+  G1 [label="c1(v1)\nc1·B = B·c1"];
+  L1 -> G1 [label="in"];
+  C1 [label="B(c1(v1))\nc1·B = B·c1"];
+  G1 -> C1 [label="x → A(x)"];
+  G1 -> C1 [label="x → B(x)"];
+  G1 -> C1 [label="c1 → B·c1", style=dotted];
+  C2 [label="id(v1)"];
+  G1 -> C2 [label="x → Nil"];
+  G1 -> C2 [label="c1 → id", style=dotted];
+  C3 [label="(B·c1)(v1)\nc1·B = B·c1"];
+  C1 -> C3;
+  C4 [label="(c1·B)(v1)\nc1·B = B·c1"];
+  C3 -> C4 [style=bold, color=green]
+  C5 [label="c1(B(v1))\nc1·B = B·c1"];
+  C4 -> C5;
+  L2 [label="let B(v1) ← v1 in c1(v1)\nc1·B = B·c1"];
+  C5 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  C6 [label="v1"];
+  C2 -> C6;
+}

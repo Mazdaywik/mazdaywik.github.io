@@ -1,0 +1,20 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [shape=record, label="{g1:|g1(n)}"];
+  C1 [label="I"];
+  G1 -> C1 [label="n → Z"];
+  G2 [shape=record, label="{g2:|g2(n)}"];
+  G1 -> G2 [label="n → S(n)"];
+  G2 -> C1 [label="n → Z"];
+  G2 -> G3 [label="n → S(n)"];
+  G3 [label="g4(c1(T2(I, I)))\nc1·g5 = g5·c1"];
+
+  C2 [label="…", style="rounded,dotted"];
+  G3 -> C2 [label="n → Z"];
+  G3 -> C2 [label="c1 → id", style=dotted];
+
+  C3 [label="…", style="rounded,dotted"];
+  G3 -> C3 [label="n → S(n)"];
+  G3 -> C3 [label="c1 → g5·c1", style=dotted];
+}

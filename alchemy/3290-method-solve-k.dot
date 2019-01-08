@@ -1,0 +1,16 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="k(x, x)"];
+  G1 [label="c0(Nil)"];
+  C0 -> G1;
+  C1 [label="…", style="dotted,rounded"];
+  G1 -> C1 [label="x → A(x)"];
+  G1 -> C1 [label="c0 → A·c0", style=dotted];
+  C2 [label="…", style="dotted,rounded"];
+  G1 -> C2 [label="x → B(x)"];
+  G1 -> C2 [label="c0 → B·c0", style=dotted];
+  C3 [label="…", style="dotted,rounded"];
+  G1 -> C3 [label="x → Nil"];
+  G1 -> C3 [label="c0 → id", style=dotted];
+}

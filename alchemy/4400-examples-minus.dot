@@ -1,0 +1,9 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [label="minus(n, n)", color=red];
+  C1 [label="Z"];
+  G1 -> C1 [label="n → Z"];
+  C2 [label="minus(n, dec(S(n)))", color=red];
+  G1 -> C2 [label="n → S(n)"];
+}

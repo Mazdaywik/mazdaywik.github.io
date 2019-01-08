@@ -1,0 +1,24 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="k(x, x)"];
+  G1 [shape=record, label="{g1:|c0(Nil)}"];
+  C0 -> G1;
+  C1 [label="A(c0(Nil))"];
+  G1 -> C1 [label="x → A(x)"];
+  G1 -> C1 [label="c0 → A·c0", style=dotted];
+  C2 [label="B(c0(Nil))"];
+  G1 -> C2 [label="x → B(x)"];
+  G1 -> C2 [label="c0 → B·c0", style=dotted];
+  C3 [label="id(Nil)"];
+  G1 -> C3 [label="x → Nil"];
+  G1 -> C3 [label="c0 → id", style=dotted];
+  L1 [label="let c0(Nil) ← v1 in A(v1)"];
+  C1 -> L1;
+  L1 -> G1 [label="let", style=dashed];
+  L2 [label="let c0(Nil) ← v1 in B(v1)"];
+  C2 -> L2;
+  L2 -> G1 [label="let", style=dashed];
+  C4 [label="Nil"];
+  C3 -> C4;
+}

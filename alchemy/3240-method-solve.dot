@@ -1,0 +1,12 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  E0 -> C0;
+  C0 [shape=record, label="{C0:|E′}"];
+  C0 -> C1 [label="v → X(v)"];
+  C0 -> C1 [label="c → f·c", style=dotted];
+  C0 -> C2 [label="v → Y(v)"];
+  C0 -> C2 [label="c → c·g", style=dotted];
+  C0 -> C3 [label="v → Z"];
+  C0 -> C3 [label="c → id", style=dotted];
+}

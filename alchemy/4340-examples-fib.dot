@@ -1,0 +1,21 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  G1 [shape=record, label="{g1:|g1(n)}"];
+  C1 [label="I"];
+  G1 -> C1 [label="n → Z"];
+  G2 [shape=record, label="{g2:|g2(n)}"];
+  G1 -> G2 [label="n → S(n)"];
+  G2 -> C1 [label="n → Z"];
+  L1 [label="let id ← c1 in g4(c1(g3(n)))\nc1·g5 = g5·c1"];
+  G2 -> L1 [label="n → S(n)"];
+  G3 [label="g4(c1(g3(n)))\nc1·g5 = g5·c1"];
+  L1 -> G3 [label="in"];
+  C2 [label="g4(c1(T2(I, I)))\nc1·g5 = g5·c1"];
+  G3 -> C2 [label="n → Z"];
+  C3 [label="g4(c1(g5(g3(n))))\nc1·g5 = g5·c1"];
+  G3 -> C3 [label="n → S(n)"];
+  L2 [label="let c1·g5 ← c1 in g4(c1(g3(n)))\nc1·g5 = g5·c1"];
+  C3 -> L2;
+  L2 -> G3 [label="in", style=dashed];
+}

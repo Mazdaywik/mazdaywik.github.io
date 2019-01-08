@@ -1,0 +1,16 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="minus(n, n)"];
+  L1 [label="let id ← c1, id ← c2 in minus(n, c1(c2(n)))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  C0 -> L1;
+  G1 [label="minus(n, c1(c2(n)))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  L1 -> G1 [label="in"];
+  C1 [label="c1(c2(Z))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  G1 -> C1 [label="n → Z"];
+  C2 [label="minus(n, c1(dec(S(c2(n)))))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  G1 -> C2 [label="n → S(n)"];
+  L2 [label="let c1·dec ← c1, S·c2 ← c2 in c1(c2(n))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  C2 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+}

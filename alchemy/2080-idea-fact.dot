@@ -1,0 +1,18 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  F1 [shape=record, label="{f1:|fact(v0)}"];
+  L1 [label="let 1 ← v1 in v1×fact(v0)"];
+  F1 -> L1;
+  G1 [shape=record, label="{g1:|v1×fact(v0)}"];
+  L1 -> G1 [label="in"];
+  C1 [label="v1×(v0+1)×fact(v0)"];
+  G1 -> C1 [label="v0 → v0+1"];
+  L2 [label="let v1×(v0+1) ← v1 in v1×fact(v0)"];
+  C1 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  C2 [label="v1×1"];
+  G1 -> C2 [label="v0 → 0"];
+  C3 [label="v1"];
+  C2 -> C3;
+}

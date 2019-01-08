@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="length(append(xs, xs))"];
+  G1 [label="c1(length(c2(Nil)))\nc1·S = S·c1"];
+  C0 -> G1;
+  C1 [label="…", style="rounded,dotted"];
+  G1 -> C1 [label="xs → Nil"];
+  G1 -> C1 [label="c1 → id\nc2 → id", style=dotted];
+  C2 [label="…", style="rounded,dotted"];
+  G1 -> C2 [label="xs → Cons(v1, xs)"];
+  G1 -> C2 [label="c1 → S·c1\nc2 → Cons(v1, •)·c2", style=dotted];
+}

@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  L1a [label="let Z ← v1 in f(v0, v1)"];
+  C1a [label="Z"];
+  L1a -> C1a [label="let"];
+  C2a [label="f(v0, v1)"];
+  L1a -> C2a [label="in"];
+
+  L1b [label="let Z ← v1 in f(v0, v1)"];
+  C2b [label="f(v0, v1)"];
+  L1b -> C2b [label="in"];
+}

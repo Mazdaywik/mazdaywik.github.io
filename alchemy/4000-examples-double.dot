@@ -1,0 +1,9 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="add(a, a)", color=red];
+  C1 [label="Z"];
+  C0 -> C1 [label="a → Z"];
+  C2 [label="S(add(a, S(a)))", color=red];
+  C0 -> C2 [label="a → S(a)"];
+}

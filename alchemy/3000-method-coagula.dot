@@ -1,0 +1,16 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  E0 -> L0;
+  L0 [label="let id ← c in E"];
+  C0 [shape=record, label="{C0:|E}"];
+  L0 -> C0 [label="in"];
+  C1 [shape=record, label="{C1:|let c·f ← c in E}"];
+  C0 -> C1 [label="v → X(v)"];
+  C1 -> C0 [label="in", style=dashed];
+  C2 [shape=record, label="{C2:|let g·c ← c in E}"];
+  C0 -> C2 [label="v → Y(v)"];
+  C2 -> C0 [label="in", style=dashed];
+  C3 [shape=record, label="{C3:|E′}"];
+  C0 -> C3 [label="v → Z"];
+}

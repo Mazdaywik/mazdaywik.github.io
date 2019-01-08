@@ -1,0 +1,22 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  F1 [shape=record, label="{f1:|fab(v0)}"];
+  L1 [label="let id ← c0 in c0(fab(v0))"];
+  F1 -> L1;
+  G1 [shape=record, label="{g1:|c0(fab(v0))}"];
+  L1 -> G1 [label="in"];
+  C1 [label="c0(B(fab(v0)))\n(c0·B)(fab(v0))"];
+  G1 -> C1 [label="v0 → A(v0)"];
+  L2 [label="let c0·B ← c0 in c0(fab(v0))"];
+  C1 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+  G1 -> C1 [label="v0 → B(v0)"];
+  C2 [label="c0(C(fab(v0)))\n(c0·C)(fab(v0))"];
+  G1 -> C2 [label="v0 → C(v0)"];
+  L3 [label="let c0·C ← c0 in c0(fab(v0))"];
+  C2 -> L3;
+  L3 -> G1 [label="in", style=dashed];
+  C3 [label="c0(Nil)"];
+  G1 -> C3 [label="v0 → Nil"];
+}

@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  L1a [label="let f(v0) ← v1 in Cons(v1, v2)"];
+  C1a [label="f(v0)"];
+  L1a -> C1a [label="let"];
+  C2a [label="Cons(v1, v2)"];
+  L1a -> C2a [label="in"];
+
+  L1b [label="let f(v0) ← v1 in Cons(v1, v2)"];
+  C1b [label="f(v0)"];
+  L1b -> C1b [label="let"];
+}

@@ -1,0 +1,20 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="rev(lst, Nil)"];
+  C1 [label="(rev(lst, •))(Nil)"];
+  C0 -> C1;
+  L1 [label="let id ← c1 in (rev(lst, •)·c1)(Nil)"];
+  C1 -> L1;
+  G1 [label="(rev(lst, •)·c1)(Nil)"];
+  L1 -> G1 [label="in"];
+  C2 [label="(rev(lst, Cons(v1, •))·c1)(Nil)"];
+  G1 -> C2 [label="lst → Cons(v1, lst)"];
+  C3 [label="(rev(lst, •)·Cons(v1, •)·c1)(Nil)"];
+  C2 -> C3;
+  C4 [label="c1(Nil)"];
+  G1 -> C4 [label="lst → Nil"];
+  L2 [label="let Cons(v1, •)·c1 ← c1 in (rev(lst, •)·c1)(Nil)"];
+  C3 -> L2;
+  L2 -> G1 [label="in", style=dashed];
+}
