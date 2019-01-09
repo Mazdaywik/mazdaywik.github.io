@@ -7,18 +7,16 @@ digraph {
   G1 -> C1 [label="n → Z"];
   G1 -> C1 [label="c1 → id\nc2 → id", style=dotted];
 
-  C2 [label="dec(c1(c2(S(Z))))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  C2 [label="c1(dec(S(c2(Z))))\nc1·dec = dec·c1\nc2·S = S·c2"];
   G1 -> C2 [label="n → S(n)"];
-  G1 -> C2 [label="c1 → dec·c1\nc2 → c2·S", style=dotted];
+  G1 -> C2 [label="c1 → c1·dec\nc2 → S·c2", style=dotted];
 
   C3 [label="id(Z)"];
   C1 -> C3;
   C4 [label="Z"];
   C3 -> C4;
 
-  C5 [label="c1(dec(S(c2(Z))))\nc1·dec = dec·c1\nc2·S = S·c2"];
-  C2 -> C5 [style=bold, color=green];
-  C6 [label="c1(c2(Z))\nc1·dec = dec·c1\nc2·S = S·c2"];
-  C5 -> C6;
-  C6 -> G1 [style=dashed];
+  C5 [label="c1(c2(Z))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  C2 -> C5;
+  C5 -> G1 [style=dashed];
 }

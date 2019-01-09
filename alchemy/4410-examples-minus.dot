@@ -8,9 +8,9 @@ digraph {
   L1 -> G1 [label="in"];
   C1 [label="c1(c2(Z))\nc1·dec = dec·c1\nc2·S = S·c2"];
   G1 -> C1 [label="n → Z"];
-  C2 [label="minus(n, c1(dec(S(c2(n)))))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  C2 [label="minus(n, dec(c1(c2(S(n)))))\nc1·dec = dec·c1\nc2·S = S·c2"];
   G1 -> C2 [label="n → S(n)"];
-  L2 [label="let c1·dec ← c1, S·c2 ← c2 in c1(c2(n))\nc1·dec = dec·c1\nc2·S = S·c2"];
+  L2 [label="let dec·c1 ← c1, c2·S ← c2 in c1(c2(n))\nc1·dec = dec·c1\nc2·S = S·c2"];
   C2 -> L2;
   L2 -> G1 [label="in", style=dashed];
 }

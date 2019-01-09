@@ -9,5 +9,5 @@ digraph {
 
   C2 [label="…", style="rounded,dotted"];
   G1 -> C2 [label="n → S(n)"];
-  G1 -> C2 [label="c1 → dec·c1\nc2 → c2·S", style=dotted];
+  G1 -> C2 [label="c1 → c1·dec\nc2 → S·c2", style=dotted];
 }
