@@ -1,6 +1,8 @@
 Опыт умозрительной дистилляции Рефала
 =====================================
 
+_Александр Коновалов, август 2018_
+
 ![Гони тоску-печаль!](distillery/0000-goni.png)
 
 _**Hamilton Distillers,** Inc. is a private family-owned and operated
