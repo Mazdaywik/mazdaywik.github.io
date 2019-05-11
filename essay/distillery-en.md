@@ -1,4 +1,4 @@
-The essay of Speculative Refal Distillation
+The Essay of Speculative Refal Distillation
 ===========================================
 
 _Alexander Konovalov, August 2018_
