@@ -269,7 +269,7 @@ erase some elements (in this case, the character `'B'`) and get
 configuration `F1`.
 
 > *Translation to English of this hunk of this paper is prepared by*
-> **Alina Dzutseva <alina.dzuceva1996@mail.ru>** _at 2019-02-25_
+> **Alina Dzuceva <alina.dzuceva1996@mail.ru>** _at 2019-02-25_
 
 Однако, не существует такой подстановки переменных, которая превращает `F1`
 в `F2`. Приходится обобщать. Обобщение конфигураций `F1` и `F2` выглядит как
