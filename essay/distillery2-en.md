@@ -5,7 +5,7 @@ _Alexander Konovalov, September 2018_
 
 **This is a translation from [russian source](distillery2.md)**
 
-Interpreter program, reducing complexity
+Intertreper program, reducing complexity
 ========================================
 
 During the discussion of distillation with colleagues, we had an idea
