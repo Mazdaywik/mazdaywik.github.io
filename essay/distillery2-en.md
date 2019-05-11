@@ -1,68 +1,77 @@
-Дистилляция как первая проекция
-===============================
+Distillation as the first projection
+====================================
 
-_Александр Коновалов, сентябрь 2018_
+_Alexander Konovalov, September 2018_
 
-Интертрепатор, снижающий сложность
-==================================
+**This is a translation from [russian source](distillery2.md)**
 
-В ходе обсуждения дистилляции с коллегами сложилась идея интерпретатора,
-который может исполнять некоторые программы с меньшей алгоритмической
-сложностью, нежели при прямолинейной интерпретации.
+Interpreter program, reducing complexity
+========================================
 
-Изложение в данной работе будет вестись, как и прежде, **на интуитивных
-основаниях,** но при этом промежуточные выкладки я буду стараться делать
-строго формально, максимально избегаяя каких-либо натяжек.
+During the discussion of distillation with colleagues, we had an idea
+of an interpreter program, which can execute some programs with less 
+algorithmic complexity than with straightforward interpretation.
 
-Дальнейшее изложение будет вестись, как и в [предыдущей работе](distillery.md),
-в терминах перестановочного Рефала. И как и прежде, перестановочный Рефал
-будет поддерживать многоместные функции как синтаксический сахар.
+The narration in this paper will be carried out, as before, **on intuitive
+grounds,** but I will try to do the intermediate calculations strictly
+formally, while avoiding any exaggeration as much as possible.
 
-Обычный интерпретатор Рефала имеет две области памяти: поле программ, которое
-не меняется при вычислениях, и поле зрения, описывающее текущее состояние
-вычислений. Интерпретатор работает по шагам, заменяя на каждом шаге в поле
-зрения активный вызов на его результат (согласно правилам, описанным в поле
-программ). Вычисления завершаются, когда результат в поле зрения пассивен —
-вызовов функций больше нет.
+The further narration will be carried out, as in [the previous work](distillery-en.md),
+in terms of the permutable Refal. And as before, the permutable Refal will
+maintain multiplace functions like syntactic sugar.
 
-А если наоборот: написать интерпретатор, у которого в поле зрения ничего
-интересного нет, но на каждом шаге переписывается поле программ?
+The usual Refal interpreter has two memory locations: the program field, which
+does not change during calculations, and the view-field, which describes
+the current state of the calculations. The interpreter program works in steps,
+replacing at each step in the view field an active invocation with its result
+(according to the rules described in the program field).
+The calculations are completed when the result is passive in the view-field —
+there are no more function calls.
 
-> Сидит еврей, думает. Подходит другой еврей.<br/>
-> — Ты о чём думаешь?<br/>
-> — Я думаю, зачем в слове «Мойша» буква «р».<br/>
-> — Так её же там нет.<br/>
-> — А если вставить?<br/>
-> — А зачем?<br/>
-> — Вот и я думаю: зачем?<br/>
+And if on the contrary: write an interpreter program, which has nothing
+interesting in the view-field, but at each step the field of programs is
+rewritten?
 
-Зачем писать такой интерпретатор? Размышления показывают, что он будет
-обладать некоторыми интересными свойствами.
+> Jew sits and thinks. Another Jew approaches.<br/>
+> — What are you thinking about?<br/>
+> — I think, why in the word "Moses" the letter "r".<br/>
+> — It’s not there.<br/>
+> — And if you insert?<br/>
+> — For what?<br/>
+> — My point exactly: for what?<br/>
 
-Аргументами интерпретатора являются начальное состояние поля зрения и исходная
-программа:
+Why do we write such an interpreter program? Reflections show that it will have
+some interesting properties.
+
+The interpreter arguments are the initial state of the the view-field and
+the source program:
 
     <Int  .......... , ....... >
           view-field   program
 
-Для простоты будем считать, что интерпретатор по соглашению начинает своё
-выполнение с некоторой функции `F`, которая вызывается с пассивным аргументом:
+For simplicity, we assume that the interpreter program by convention begins its
+execution with some function `F`, which is called with a passive argument:
 
     <Int ....... , ....... >
          <F arg>   program
 
-Обычный интерпретатор Рефала в данном случае стал бы переписывать поле зрения,
-меняя на каждой итерации первый аргумент и сохраняя второй констатным.
+The usual Refal interpreter in this case would begin to rewrite the view-field,
+changing the first argument for each iteration and keeping the second one
+definite.
 
-Наш будет действовать иначе (почему? потому!). Он будет подготавливать программу
-идеально к каждому следующему шагу. Как? Суперкомпиляцией. Но, если
-суперкомпилятору «скормить» программу с константным аргументом, остаточная
-программа просто будет функцией `Go`, возвращающей константу. Чтобы
-суперкомпилятор выдал нетривиальную остаточную программу, нужно скормить ему
-программу с параметрами. Поэтому интерпретатор вводит параметры:
+Ours will act differently (Why? Just because!). He will prepare the program
+ideally for each next step. How? Using supercompilation. But, if
+the supercompiler "eats away" a program with a constant argument, the residual
+program will simply be a `Go` function that returns a constant. In order for
+the supercompiler to produce a non-trivial residual program, you need to "feed"
+it a program with parameters. Therefore, the interpreter program enters
+the parameters:
 
     <Int-Loop <Scp .............arg............ >>
                    Go { = <F e.[ • ]> } program
+
+> *Translation to English of this hunk of this paper is prepared by*
+> **Solodilova Darya <solodilovaa@yandex.ru>** _at 2019-02-25_
 
 Здесь к исходной программе была добавлена функция `Go`, вызываемая без
 параметров, правая часть которой содержит исходный вызов функции
@@ -873,19 +882,4 @@ _Александр Коновалов, сентябрь 2018_
         ↓ }
       >
     >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
