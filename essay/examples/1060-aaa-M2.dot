@@ -1,0 +1,20 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<F1 #s.1# #e.0#, ε>"];
+  C1 [label="<F1 #e.0#, 'A'>"];
+  C0 -> C1;
+  F1 [shape=record, label="{F1:|\<F1 e.0, 'A' e.1\>}"];
+  C1 -> F1 [label="#e.0# ← e.0\nε ← e.1"];
+  F2 [shape=record, label="{F2:|\<F2 'A' e.1\>}"];
+  F1 -> F2 [label="e.0 → ε"];
+  C3 [label="<F1 e.0, 'A' e.1 'A'>"];
+  C3 -> F1 [label="e.1 'A' ← e.1", style=dashed];
+  F1 -> C3 [label="e.0 → s.3 e.0"];
+  C4 [label="False"];
+  F2 -> C4 [label="e.1 → e.1 'B'"];
+  C5 [label="True"];
+  F2 -> C5 [label="e.1 → ε"];
+  C6 [label="True"];
+  F2 -> C6 [label="e.1 → e.1 s.2\ns.2 ≠ 'B'"];
+}

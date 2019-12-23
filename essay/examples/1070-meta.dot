@@ -1,0 +1,10 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  M0;
+  M1 [label="True"];
+  M0 -> M1 [label="e.0 → ε"];
+  M2;
+  M0 -> M2 [label="e.0 → s.1 e.0"];
+  M2 -> M0 [style=dashed];
+}

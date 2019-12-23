@@ -1,0 +1,13 @@
+digraph {
+  node [shape=box, style=rounded];
+
+  C0 [label="<F1 #s.1# #e.0#, ε>"];
+  C1 [label="<F1 #e.0#, 'A'>"];
+  C0 -> C1;
+  F1 [shape=record, label="{F1:|\<F1 e.0, 'A' e.1\>}"];
+  C1 -> F1 [label="#e.0# ← e.0\nε ← e.1"];
+  F2 [shape=record, label="{F2:|\<F2 'A' e.1\>}", style="rounded,dashed"];
+  F1 -> F2 [label="e.0 → ε"];
+  C3 [label="…", style="rounded,dotted"];
+  F1 -> C3 [label="e.0 → s.3 e.0"];
+}
