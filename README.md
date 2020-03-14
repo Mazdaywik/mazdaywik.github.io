@@ -40,4 +40,23 @@
 * <https://github.com/Mazdaywik/direct-link> — файлопомойка для расшаривания
   файлов по прямым ссылкам. **[ССЫЛКА](https://mazdaywik.github.io/direct-link)**
 
-_Последнее обновление: 2019-05-11._
+_Последнее обновление: 2020-03-14._
+
+<!-- 60 WWF Widget -->
+<script type="text/javascript">
+	(function(e, a, r, t, h) {
+		e[h] = e[h] || function () {
+			(e[h].a = e[h].a || []).push(arguments)
+		}, e[h].l = 1 * new Date();
+		var s = a.createElement(r), n = a.getElementsByTagName(r)[0];
+		s.async = 1;
+		s.src = t;
+		n.parentNode.insertBefore(s, n)
+	})(window, document, 'script', 'https://60widget.wwf.ru/min.js', 'wwf60');
+
+	wwf60('options', {
+		position: 'bottom right',
+		hits: 1
+	});
+</script>
+<!-- End 60 WWF Widget -->
